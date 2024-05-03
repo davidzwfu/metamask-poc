@@ -128,7 +128,7 @@ function WriteContract({
 }) {
   const { data: hash, writeContract } = useWriteContract()
 
-  async function submit(event: FormEvent<HTMLFormElement>) {
+  async function transferNft(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const formData = new FormData(event.target as HTMLFormElement)
     const contractAddress = formData.get('contractAddress') as `0x${string}`
@@ -150,7 +150,7 @@ function WriteContract({
     <>
       <h2>Write Contract (Transfer NFT)</h2>
 
-      <form onSubmit={(event) => submit(event)}>
+      <form onSubmit={(event) => transferNft(event)}>
         <div>
           <div>Smart contract address:</div>
           <input name="contractAddress" defaultValue={'0x...'} />
