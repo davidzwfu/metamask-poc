@@ -3,6 +3,7 @@ import { erc721Abi, parseEther } from 'viem'
 import {
   UseAccountReturnType,
   useAccount,
+  useBalance,
   useConnect,
   useDisconnect,
   useReadContracts,
@@ -55,6 +56,9 @@ function Account({
 }: { 
   account: UseAccountReturnType 
 }) {
+  const { data: balance } = useBalance({
+    address: account.addresses?.at(0)
+  })
   const { disconnect } = useDisconnect()
 
   return (
@@ -64,6 +68,7 @@ function Account({
       <div>Status: {account.status}</div>
       <div>Addresses: {JSON.stringify(account.addresses)}</div>
       <div>Chain: {account.chain?.name} ({account.chainId})</div>
+      <div>Balance: {balance?.formatted} {balance?.symbol}</div>
 
       {account.status === 'connected' && (
         <button type="button" onClick={() => disconnect()}>
